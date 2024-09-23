@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1" height="1" style="display:none;">
+    <defs>
+        <style type="text/css">
+            div.highlight-source-sql > pre > .pl-k {
+                color: var(--fgColor-accent, var(--color-accent-fg)); /* Example style */
+            }
+        </style>
+    </defs>
+</svg>
