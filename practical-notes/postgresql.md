@@ -56,29 +56,107 @@
 ### Creating a table
 
 ```sql
-CREATE TABLE cities (
-  name VARCHAR(50),
-  country VARCHAR(50),
-  population INTEGER,
-  area INTEGER
+-- CREATE A TABLE USING THE CREATE TABLE KEYWORD
+CREATE TABLE table_name (
+  first_column TEXT,
+  second_column INTEGER
 );
+
+-- RETRIEVE DATA FROM SPECIFIED COLUMNS ONLY
+SELECT specify, column, names FROM table_name; 
 ```
 
-- The `CREATE TABLE` keyword ...
-- `cities` is the identifier
+- Creates a table named `table_name` with two columns
+- The first column is named first_column and has a data type of text; the second column has the name second_column and the type integer
+- The table and column names follow the identifier syntax explained in Section 4.1.1.
+- The type names are usually also identifiers, but there are some exceptions
+- Note that the column list is comma-separated and surrounded by parentheses
 
 ### Inserting data into a table
 
 ```sql
+-- INSERT ONE USING THE INSERT INTO KEYWORD
+INSERT INTO table_name (list/value, of, columns, that, will, be, provided)
+VALUES (<comma separated values to insert>);
 
+-- INSERT MULTIPLE ROWS AT ONCE USING THE INSERT INTO KEYWORD
+INSERT INTO table_name (list/value, of, columns, that, will, be, provided)
+VALUES
+	(<comma separated values to insert>),
+	(<comma separated values to insert>),
+	-- ...
+	(<comma separated values to insert>);
 ```
 
-- 
+- Order of columns in first set of parentheses does not have to match the order of columns in the given table
+- However, order of provided values in second set of parentheses has to match the one in the first set
 
 ### Retrieving records
+
+```sql
+-- RETRIEVE DATA FROM ALL OF THE COLUMNS
+SELECT * FROM table_name;
+
+-- RETRIEVE DATA FROM SPECIFIED COLUMNS ONLY
+SELECT specify, column, names FROM table_name; 
+```
+
+- `*` refers to retrieving data from all of the columns inside a given table
+
+### SQL statement execution order
+
+```sql
+SELECT column      -- Third
+	FROM table       -- First
+	WHERE condition  -- Second
+```
+
+### Updating records
+
+```sql
+UPDATE table_name
+SET column=value
+WHERE condition;
+```
+
+- `SET` keyword describes the property we want to change on some record
+
+### Deleting records
+
+```sql
+DELETE FROM table_name
+WHERE condition;
+```
+
+- When deleting records that are referenced to by a foreign key, update the foreign key to `NULL` to dereference the record ➡ ==on delete options== to describe that should happen if a record is deleted that is still being referenced to
+- `ON DELETE RESTRICT` – throw an error (==default behavior==)
+- `ON DELETE NO ACTION` – throw an error
+- `ON DELETE CASCADE` – delete the referencing record too
+- `ON DELETE SET NULL` – set the foreign key of the referencing record to `NULL`
+- `ON DELETE SET DEFAULT` – set the foreign key of the referencing record to a default value, if one is provided
+- On delete options are set after the foreign key column definition within the create table statement of the column to which they're applied
+
 ### Filtering records
+
+SELECT * FROM table_name
+WHERE condition;
+```
+
+- Filters are applied using the `WHERE` keyword
+- `WHERE` keyword allows to filter the set of results we get back from a query
+- Comparison math operators that can be used inside a where statement include `=`, `<=`, `>`, `<`, `<>` or `!=`, `>=`, `BETWEEN`, `IN`, `NOT IN`
+- *Compound checks* allow to apply multiple conditions at once to filter the set of results using the `AND` and `OR` keywords within a `WHERE` clause
+- Calculations can be used within `WHERE` clauses as well
+
 ### Relating records with joins
 ### Aggregation of records
+
+- In SQL, data can be transformed or processed before receiving it using operators
+- Available operators include `+`, `-`, `*`, `/`, `^` (exponent), `|/` (sqrt), `@` (abs), `%`
+
+- Available string operators include `||` (join)
+- Available string functions include `CONCAT()` (join), `LOWER()` (lower case), `LENGTH()` (num chars), `UPPER()` (upper case)
+
 ### Working with large datasets
 ### Unions and intersections with sets
 ### Assembling queries with sub-queries
